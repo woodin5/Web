@@ -33,7 +33,7 @@ public class DownloadApk extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		 File f = new File("E:"+File.separator+"wmz"+File.separator+"apk"+File.separator+"CheckingTickets.apk");  
+		 File f = new File("E:"+File.separator+"wmz"+File.separator+"apk"+File.separator+"Test.apk");  
 	        if(f.exists()){  
 	            FileInputStream  fis = new FileInputStream(f);  
 	            String filename=URLEncoder.encode(f.getName(),"utf-8"); //解决中文文件名下载后乱码的问题  
