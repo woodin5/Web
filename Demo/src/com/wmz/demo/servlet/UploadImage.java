@@ -7,15 +7,19 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.print.DocFlavor.STRING;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.tribes.util.StringManager;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.wmz.demo.helper.FileUtils;
 
 /**
  * Servlet implementation class UploadImage
@@ -84,6 +88,9 @@ public class UploadImage extends HttpServlet {
 			out.println("<title>Servlet upload</title>");
 			out.println("</head>");
 			out.println("<body>");
+			
+			String id = null, sessionId = null;
+			
 			while (i.hasNext()) {
 				FileItem fi = (FileItem) i.next();
 				if (!fi.isFormField()) {
@@ -101,6 +108,23 @@ public class UploadImage extends HttpServlet {
 					}
 					fi.write(file);
 					out.println("Uploaded Filename: " + fileName + "<br>");
+				} else {
+					
+					String name = fi.getFieldName();
+					String value = fi.getString();
+					out.println("name=" + name);
+					out.println("value=" + value);
+					if (name.equals("id")) {
+						id = value;
+					}else if (name.equals("sessionId")) {
+						sessionId = value;
+					}
+
+					String path = "e:" + File.separator + "wmz" + File.separator + "upload" + File.separator
+							+ "upload.txt";
+
+					FileUtils.writeFile(path, "id=" + id + "|sessionId=" + sessionId);
+
 				}
 			}
 			out.println("</body>");
@@ -117,6 +141,8 @@ public class UploadImage extends HttpServlet {
 
 	private void showRequsetParam(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		StringBuffer sb = new StringBuffer();
+
 		PrintWriter out = response.getWriter();
 		String title = "HTTP Header ÇëÇóÊµÀý";
 		String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n";
@@ -134,5 +160,6 @@ public class UploadImage extends HttpServlet {
 			out.println("<td> " + paramValue + "</td></tr>\n");
 		}
 		out.println("</table>\n</body></html>");
+
 	}
 }

@@ -13,7 +13,8 @@
 	<br />
 	<form action="UploadImage" method="post" enctype="multipart/form-data">
 		<input type="file" name="file" size="50" /> <br /> <input
-			type="submit" value="上传文件" />
+			type="submit" value="上传文件" /> <input type="text" name="id" value="1">
+		<input type="text" name="sessionId" value="2">
 	</form>
 </body>
 </html>

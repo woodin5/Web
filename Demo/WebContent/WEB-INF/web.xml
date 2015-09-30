@@ -24,7 +24,14 @@
         e:\wmz\upload\
      </param-value>
 	</context-param>
-
+	<servlet>
+		<servlet-name>ReceiveFinger</servlet-name>
+		<servlet-class>com.wmz.demo.servlet.ReceiveFinger</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReceiveFinger</servlet-name>
+		<url-pattern>/ReceiveFinger</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>WebServlet</servlet-name>
 		<servlet-class>com.wmz.demo.servlet.WebServlet</servlet-class>
